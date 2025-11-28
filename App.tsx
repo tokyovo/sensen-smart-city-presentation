@@ -59,29 +59,29 @@ const App: React.FC = () => {
   const progress = ((currentSlideIndex + 1) / totalSlides) * 100;
 
   return (
-    <div className="min-h-screen bg-slate-200 flex items-center justify-center p-4 md:p-8 font-sans">
-      <div className="w-full max-w-[1400px] aspect-video max-h-[90vh] flex flex-col gap-4">
-        
+    <div className="min-h-screen bg-terminal-bg flex items-center justify-center p-4 md:p-8 font-mono">
+      <div className="w-full max-w-[1400px] aspect-video max-h-[90vh] flex flex-col gap-3">
+
         {/* Main Presentation Window */}
-        <div className="flex-1 bg-white rounded-2xl shadow-2xl overflow-hidden relative">
+        <div className="flex-1 bg-terminal-surface border-2 border-terminal-border shadow-2xl overflow-hidden relative">
 
             {/* Slide Content */}
-            <div className="absolute inset-0 p-2 md:p-4 bg-slate-100">
+            <div className="absolute inset-0 p-2 md:p-4 bg-terminal-bg">
                 <SlideRenderer slide={SLIDES[currentSlideIndex]} />
             </div>
         </div>
 
-        {/* Bottom Bar: Progress & Thumbnails */}
-        <div className="bg-white rounded-xl shadow-lg p-4 flex items-center justify-center relative">
+        {/* Bottom Bar: Terminal-style control panel */}
+        <div className="bg-terminal-surface border-2 border-terminal-border shadow-lg p-3 flex items-center justify-center relative">
 
-            {/* Left Side Info - Absolute positioned */}
+            {/* Left Side Info - Terminal style */}
             <div className="absolute left-4 flex items-center gap-3">
-                 <div className="p-2 bg-brand-100 text-brand-700 rounded-lg">
-                    <MonitorPlay size={20} />
+                 <div className="px-2 py-1 bg-terminal-bg border border-brand-yellow text-brand-yellow">
+                    <MonitorPlay size={18} />
                  </div>
                  <div>
-                    <h3 className="text-sm font-bold text-slate-800">SenSen Ecosystem</h3>
-                    <p className="text-xs text-slate-500">Slide {currentSlideIndex + 1} of {totalSlides}</p>
+                    <h3 className="text-xs font-bold text-brand-yellow uppercase tracking-wider">[ SenSen Ecosystem ]</h3>
+                    <p className="text-xs text-brand-blue">&#62; Slide {currentSlideIndex + 1}/{totalSlides}</p>
                  </div>
             </div>
 
@@ -91,9 +91,9 @@ const App: React.FC = () => {
                 <button
                     onClick={prevSlide}
                     disabled={currentSlideIndex === 0}
-                    className={`p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all duration-300 ${currentSlideIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:scale-110'}`}
+                    className={`px-3 py-1 border-2 bg-terminal-bg text-brand-blue transition-all duration-200 ${currentSlideIndex === 0 ? 'opacity-30 cursor-not-allowed border-terminal-border' : 'border-brand-blue hover:bg-brand-blue hover:text-terminal-bg'}`}
                 >
-                    <ChevronLeft size={20} />
+                    <ChevronLeft size={18} />
                 </button>
 
                 {/* Pagination Dots */}
@@ -102,10 +102,10 @@ const App: React.FC = () => {
                         <button
                             key={idx}
                             onClick={() => goToSlide(idx)}
-                            className={`h-2 rounded-full transition-all duration-300 ${
+                            className={`h-2 transition-all duration-300 ${
                                 idx === currentSlideIndex
-                                ? 'w-8 bg-brand-600'
-                                : 'w-2 bg-slate-300 hover:bg-slate-400'
+                                ? 'w-8 bg-brand-yellow'
+                                : 'w-2 bg-terminal-border hover:bg-brand-blue'
                             }`}
                             aria-label={`Go to slide ${idx + 1}`}
                         />
@@ -116,9 +116,9 @@ const App: React.FC = () => {
                 <button
                     onClick={nextSlide}
                     disabled={currentSlideIndex === totalSlides - 1}
-                    className={`p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all duration-300 ${currentSlideIndex === totalSlides - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:scale-110'}`}
+                    className={`px-3 py-1 border-2 bg-terminal-bg text-brand-blue transition-all duration-200 ${currentSlideIndex === totalSlides - 1 ? 'opacity-30 cursor-not-allowed border-terminal-border' : 'border-brand-blue hover:bg-brand-blue hover:text-terminal-bg'}`}
                 >
-                    <ChevronRight size={20} />
+                    <ChevronRight size={18} />
                 </button>
             </div>
 
@@ -126,10 +126,10 @@ const App: React.FC = () => {
             <div className="absolute right-4">
                 <button
                     onClick={toggleFullscreen}
-                    className="p-2 rounded-lg bg-brand-100 hover:bg-brand-200 text-brand-700 hover:text-brand-900 transition-all duration-300 hover:scale-110"
+                    className="px-3 py-1 border-2 border-brand-green bg-terminal-bg text-brand-green hover:bg-brand-green hover:text-terminal-bg transition-all duration-200 uppercase text-xs font-bold"
                     title="Toggle Fullscreen (F)"
                 >
-                    <Maximize2 size={20} />
+                    <Maximize2 size={18} />
                 </button>
             </div>
 

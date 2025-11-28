@@ -4,20 +4,36 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SenSen Smart City Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
+            fontFamily: {
+              mono: ['"JetBrains Mono"', 'Consolas', 'Monaco', 'Courier New', 'monospace'],
+            },
             colors: {
+              terminal: {
+                bg: '#1a1a1a',
+                surface: '#2a2a2a',
+                border: '#404040',
+                text: '#f4e24a',
+                textDim: '#d4c43a',
+                textBright: '#ffed5a',
+                accent: '#4a90e2',
+                warning: '#f4e24a',
+                error: '#e24a4a',
+                success: '#5fb878',
+              },
               brand: {
-                50: '#f0f9ff',
-                100: '#e0f2fe',
-                500: '#0ea5e9',
-                600: '#0284c7',
-                700: '#0369a1',
-                800: '#075985',
-                900: '#0c4a6e',
+                blue: '#3d5a99',
+                green: '#5fb878',
+                yellow: '#f4e24a',
+                dark: '#1a1a1a',
+                light: '#f5f5f5',
               }
             }
           }
@@ -37,7 +53,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-slate-100 text-slate-800 antialiased overflow-hidden">
+  <body class="bg-terminal-bg text-terminal-text font-mono antialiased overflow-hidden">
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
