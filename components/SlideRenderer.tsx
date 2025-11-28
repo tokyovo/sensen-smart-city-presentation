@@ -52,104 +52,96 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({ slide }) => {
   }
 
   return (
-    <div className="h-full bg-white p-8 md:p-12 rounded-xl shadow-xl flex flex-col overflow-y-auto">
+    <div className="h-full bg-gradient-to-br from-slate-50 to-white p-6 md:p-8 rounded-xl shadow-xl flex flex-col overflow-y-auto">
       {/* Header */}
-      <div className="border-b border-slate-100 pb-6 mb-6">
-        <div className="flex items-center gap-3 text-brand-600 mb-2">
-            <Target size={24} />
-            <span className="text-sm font-bold uppercase tracking-wider">Product Overview</span>
+      <div className="mb-6">
+        <div className="flex items-center gap-2 text-brand-600 mb-2">
+            <Target size={20} />
+            <span className="text-xs font-bold uppercase tracking-wider">Product Overview</span>
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-900">{slide.title}</h2>
-        <h3 className="text-xl text-slate-500 font-medium">{slide.subtitle}</h3>
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-1">{slide.title}</h2>
+        <h3 className="text-lg text-brand-600 font-semibold">{slide.subtitle}</h3>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
-        
-        {/* Left Column: Problem & Stats */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
-            <div className="bg-red-50 p-6 rounded-xl border border-red-100">
+      {/* Two Column Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow">
+
+        {/* Left Column */}
+        <div className="flex flex-col gap-5">
+            {/* Problem */}
+            <div className="bg-gradient-to-br from-red-50 to-orange-50 p-5 rounded-xl border-2 border-red-200">
                 <div className="flex items-center gap-2 mb-3 text-red-700">
-                    <AlertTriangle size={20} />
-                    <h4 className="font-semibold">The Problem</h4>
+                    <AlertTriangle size={22} strokeWidth={2.5} />
+                    <h4 className="font-bold text-lg">The Problem</h4>
                 </div>
-                <p className="text-slate-700 leading-relaxed text-sm">
+                <p className="text-slate-800 leading-relaxed text-sm font-medium">
                     {slide.problem}
                 </p>
             </div>
 
-            {slide.stats && (
-                <div className="bg-slate-50 p-6 rounded-xl border border-slate-100 flex-grow flex flex-col">
-                    <div className="flex items-center gap-2 mb-2 text-slate-700">
-                        <TrendingUp size={20} />
-                        <h4 className="font-semibold">Impact Stats</h4>
-                    </div>
-                    <div className="text-4xl font-bold text-brand-600 mb-1">{slide.stats.value}</div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-4">
-                        {slide.stats.label}
-                    </div>
-                    <p className="text-sm text-slate-600 mb-4">{slide.stats.description}</p>
-                    {/* Chart Area */}
-                    <div className="mt-auto">
-                        <SlideChart data={slide.stats} />
-                    </div>
+            {/* Solution */}
+            <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-5 rounded-xl border-2 border-emerald-200 flex-grow">
+                <div className="flex items-center gap-2 mb-3 text-emerald-700">
+                    <CheckCircle2 size={22} strokeWidth={2.5} />
+                    <h4 className="font-bold text-lg">The Solution</h4>
                 </div>
-            )}
-        </div>
-
-        {/* Right Column: Solution & Details */}
-        <div className="lg:col-span-8 flex flex-col gap-6">
-            
-            <div className="bg-brand-50 p-8 rounded-xl border border-brand-100 relative overflow-hidden">
-                <div className="absolute right-0 top-0 w-32 h-32 bg-brand-200/20 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2"></div>
-                <div className="flex items-center gap-2 mb-4 text-brand-800 relative z-10">
-                    <CheckCircle2 size={24} />
-                    <h4 className="text-xl font-bold">The Solution</h4>
-                </div>
-                <p className="text-slate-700 text-lg leading-relaxed relative z-10">
+                <p className="text-slate-800 leading-relaxed text-sm font-medium">
                     {slide.solution}
                 </p>
             </div>
+        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
-                <div className="bg-white border border-slate-200 p-6 rounded-xl shadow-sm">
-                    <div className="flex items-center gap-2 mb-4 text-slate-800">
-                        <Users size={20} />
-                        <h4 className="font-semibold">Stakeholders & Users</h4>
-                    </div>
-                    <div className="space-y-4">
-                        <div>
-                            <span className="text-xs font-bold text-slate-400 uppercase block mb-1">Key Stakeholders</span>
-                            <div className="flex flex-wrap gap-2">
-                                {slide.stakeholders?.map((s, i) => (
-                                    <span key={i} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-md font-medium">
-                                        {s}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                        <div>
-                            <span className="text-xs font-bold text-slate-400 uppercase block mb-1">End Users</span>
-                             <div className="flex flex-wrap gap-2">
-                                {slide.endUsers?.map((u, i) => (
-                                    <span key={i} className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md font-medium">
-                                        {u}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+        {/* Right Column */}
+        <div className="flex flex-col gap-5">
+
+            {/* Stakeholders & Users */}
+            <div className="bg-white border-2 border-slate-200 p-5 rounded-xl shadow-sm">
+                <div className="flex items-center gap-2 mb-4 text-slate-800">
+                    <Users size={22} strokeWidth={2.5} />
+                    <h4 className="font-bold text-lg">Stakeholders & Users</h4>
                 </div>
-
-                <div className="bg-slate-900 text-white p-6 rounded-xl shadow-lg flex flex-col justify-center relative overflow-hidden">
-                     <div className="absolute right-0 bottom-0 w-24 h-24 bg-brand-500 rounded-full blur-2xl opacity-20 transform translate-x-1/3 translate-y-1/3"></div>
-                    <div className="flex items-center gap-2 mb-2 text-brand-400 relative z-10">
-                        <DollarSign size={20} />
-                        <h4 className="font-semibold">Estimated Pricing</h4>
+                <div className="space-y-3">
+                    <div>
+                        <span className="text-xs font-bold text-slate-500 uppercase block mb-2">Key Stakeholders</span>
+                        <div className="flex flex-wrap gap-2">
+                            {slide.stakeholders?.map((s, i) => (
+                                <span key={i} className="px-3 py-1.5 bg-slate-100 text-slate-700 text-xs rounded-lg font-semibold border border-slate-200">
+                                    {s}
+                                </span>
+                            ))}
+                        </div>
                     </div>
-                    <div className="text-2xl font-bold mb-1 relative z-10">{slide.pricing}</div>
-                    <div className="text-sm text-slate-400 relative z-10">{slide.pricingRange}</div>
+                    <div>
+                        <span className="text-xs font-bold text-slate-500 uppercase block mb-2">End Users</span>
+                         <div className="flex flex-wrap gap-2">
+                            {slide.endUsers?.map((u, i) => (
+                                <span key={i} className="px-3 py-1.5 bg-blue-50 text-blue-700 text-xs rounded-lg font-semibold border border-blue-200">
+                                    {u}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            {/* Pricing */}
+            <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-5 rounded-xl shadow-lg flex-grow">
+                <div className="flex items-center gap-2 mb-3 text-brand-300">
+                    <DollarSign size={22} strokeWidth={2.5} />
+                    <h4 className="font-bold text-lg">Estimated Pricing</h4>
+                </div>
+                <div className="space-y-2">
+                    {slide.pricing?.split('|').map((item, i) => (
+                        <div key={i} className="text-sm font-semibold text-white/90 leading-relaxed">
+                            • {item.trim()}
+                        </div>
+                    ))}
+                </div>
+                <div className="text-xs text-brand-300 font-semibold mt-3 pt-3 border-t border-white/20">
+                    {slide.pricingRange}
+                </div>
+            </div>
+
         </div>
 
       </div>
